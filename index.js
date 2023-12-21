@@ -11,7 +11,7 @@ app.use(express.json());
 app.get('/',(req,res)=>{
     res.status(200).send({
         status : 200,
-        message : "This backend is under construction,working on it."
+        message : "This backend is under construction,working on it.Will update as soon as possible"
     })
 })
 

@@ -1,6 +1,6 @@
 # File Manger Backend :
 
-#### Note : This app is under construction,working on it.
+#### Note : This app is under construction,working on it.Will update as soon as possible
 
 ##### Technologies Used : PostgreSQL,Express,Node.js.
 
