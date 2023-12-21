@@ -5,6 +5,7 @@ const cors = require('cors');
 const querying = require('./elephantsql');
 const useractions = require('./routes/useractions');
 const filemanageractions = require('./routes/filemanageractions');
+require('./awssdk');
 
 app.use(cors({origin:'*'}));
 app.use(express.json());

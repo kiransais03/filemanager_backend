@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const conString = "postgres://hfsswipl:i_fXre6GSShmk_C6rv8ErZR0HRm33hwo@flora.db.elephantsql.com/hfsswipl";
+const conString = process.env.DATABASE_URL;
 
 const pool = new Pool({
   connectionString: conString,
