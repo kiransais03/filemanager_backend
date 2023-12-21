@@ -3,9 +3,15 @@ const app = express();
 require('dotenv').config(); 
 const cors = require('cors');
 const querying = require('./elephantsql');
+const useractions = require('./routes/useractions');
+const filemanageractions = require('./routes/filemanageractions');
 
 app.use(cors({origin:'*'}));
 app.use(express.json());
+
+app.use('/user',useractions);
+
+app.use('/filemanager',filemanageractions);
 
 
 app.get('/',(req,res)=>{
