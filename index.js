@@ -11,7 +11,7 @@ app.use(express.json());
 app.get('/',(req,res)=>{
     res.status(200).send({
         status : 200,
-        message : "The server is running fine.Take Rest."
+        message : "This backend is under construction,working on it."
     })
 })
 
