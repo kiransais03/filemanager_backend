@@ -48,5 +48,5 @@
 
 #### --Backend : https://filemanager-backend.onrender.com/
 
-### Attaching The Postman API Documentations : Refer Github Repository
+### Attaching The Postman API Documentations : Refer Github Repository (File name : Filemanager.postman_collection.json )
 
