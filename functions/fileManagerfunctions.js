@@ -1,10 +1,12 @@
 const {s3,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand } = require('../awssdk');
 const {TRUE,FALSE,ERROR,NOT_EXIST} = require('../constants');
 const multer = require('multer');
-const multerS3 = require('multer-s3')
+const multerS3 = require('multer-s3');
+const fs = require('fs');
+const path = require('path')
 
-
-const createMainuserfolder =async (req,res)=>{
+//Create main folder function
+const createMainuserfolder =async (req,res)=>{ 
 
     const foldername = req.body.foldername;
 
@@ -34,6 +36,7 @@ const createMainuserfolder =async (req,res)=>{
   })
 }
 
+//Create subfolder function
 const createsubfolder =async (req,res)=>{
 
     const folderkey = req.body.folderkey;
@@ -76,6 +79,7 @@ const createsubfolder =async (req,res)=>{
   })
 }
 
+//Delete folder function
 const deletefolder = async (req,res)=>{
 
   const folderaddress = req.params['key'];
@@ -120,6 +124,7 @@ const deletefolder = async (req,res)=>{
       })
 }
 
+//Deletefile function
 const deletefile = async (req,res)=>{
 
   const fileaddress = req.params['key'];
@@ -164,6 +169,7 @@ const deletefile = async (req,res)=>{
       })
 }
 
+//Upload file function
 const uploadfile =async (req,res)=>{
 
   try {
@@ -186,6 +192,7 @@ const uploadfile =async (req,res)=>{
  }
 }
 
+//Get file from AWS S3 function
 const getfile = async (req,res)=>{
 
   const fileaddress = req.params['key'];
@@ -198,14 +205,27 @@ const getfile = async (req,res)=>{
 
   try {
     const response =await s3.send(command);
-    const file = await response.Body.transformToWebStream();
-    console.log(file,"File has been successfully retrieved");
+    const file = await response.Body.transformToByteArray();
+    console.log("File has been successfully retrieved");
 
-    res.setHeader('Content-Type','images/png');
+    let temppath = path.resolve(__dirname,'tempstorage','awsS3fileimage.png'); 
 
-    res.setHeader('Content-Disposition', `attachment; filename=${response.requestId}`);
+    res.setHeader('Content-Type','image/png');
+ 
+    fs.writeFileSync(temppath,file);
 
-    res.send(file);
+    res.sendFile(temppath,(error)=>{
+      fs.unlinkSync(temppath);
+
+      if(error) {
+          res.status(400).send({
+              status:400,
+              message:"Failed to retrieve the file"
+          })
+
+          return ;
+      }
+    })
   }
   catch(error) {
     console.log(error);
