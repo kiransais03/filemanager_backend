@@ -1,7 +1,5 @@
 # File Manger Backend :
 
-#### Note : This app is under construction,working on it.Will update as soon as possible
-
 ##### Technologies Used : PostgreSQL,Express,Node.js.
 
 #### Dev Tools : VS Code,Github,Render
