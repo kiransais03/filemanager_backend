@@ -24,7 +24,6 @@
 #####  Schema Of PostgreSQL Tables :
 ###### Table 1. “users” :
   Attributes - 
-  id               Int                   autoincrement()
   email            varchar(255)          unique
   password         varchar(255)  
   name             varchar(255)  
