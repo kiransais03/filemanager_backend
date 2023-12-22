@@ -77,7 +77,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"foldername\" : \"kiransaidata\"\r\n}",
+					"raw": "{\r\n    \"foldername\" : \"kiransaidisk\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +85,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/filemanager/createfolder",
+					"raw": "http://localhost:8080/filemanager/createmainuserfolder",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -93,14 +93,14 @@
 					"port": "8080",
 					"path": [
 						"filemanager",
-						"createfolder"
+						"createmainuserfolder"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/filemanager/delete/kiransaidata-kiransais03@gmail.com",
+			"name": "http://localhost:8080/filemanager/deletefile/kiransaidisk-kiransais03@gmail.com/images/1703258484115_25percent.png",
 			"request": {
 				"method": "DELETE",
 				"header": [
@@ -111,7 +111,36 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/filemanager/deletefolder/kiransaidata-kiransais03@gmail.com",
+					"raw": "http://localhost:8080/filemanager/deletefile/kiransaidisk-kiransais03@gmail.com/images/1703259523819_25percent.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"deletefile",
+						"kiransaidisk-kiransais03@gmail.com",
+						"images",
+						"1703259523819_25percent.png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/deletefolder/kiransaidisk-kiransais03@gmail.com/images",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/filemanager/deletefolder/kiransaidisk-kiransais03@gmail.com/images",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -120,7 +149,8 @@
 					"path": [
 						"filemanager",
 						"deletefolder",
-						"kiransaidata-kiransais03@gmail.com"
+						"kiransaidisk-kiransais03@gmail.com",
+						"images"
 					]
 				}
 			},
@@ -139,7 +169,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"folderkey\" : \"kiransaidata-kiransais03@gmail.com/images\"\r\n}",
+					"raw": "{\r\n    \"folderkey\" : \"kiransaidisk-kiransais03@gmail.com/images\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -156,6 +186,76 @@
 					"path": [
 						"filemanager",
 						"createsubfolder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/uploadfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "awslocationkey",
+							"value": "kiransaidisk-kiransais03@gmail.com/images",
+							"type": "text"
+						},
+						{
+							"key": "mainfileupload",
+							"type": "file",
+							"src": "/C:/Users/kiran/Downloads/25percent.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/filemanager/uploadfile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"uploadfile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/getfile/kiransaidisk-kiransais03@gmail.com/images/1703250119284_25percent.png",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/filemanager/getfile/kiransaidisk-kiransais03@gmail.com/images/1703251519322_25percent.png",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"getfile",
+						"kiransaidisk-kiransais03@gmail.com",
+						"images",
+						"1703251519322_25percent.png"
 					]
 				}
 			},

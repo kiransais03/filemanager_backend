@@ -20,13 +20,20 @@
 --The Backend is Built on Express framework with Node.js runtime.
 
 #####  Schema Of PostgreSQL Tables :
-###### Table 1. “users” :
-######  Attributes 
+
+##### Table 1. “users” :
+#####  Attributes 
   - email       varchar(255) unique,
   - password    varchar(255), 
   - name        varchar(255),
-  - createdAt   DateTime,
+  - createdAt   DateTime
 
+##### Table 2. "filesmetadata" :
+#####  Attributes 
+  - filename       varchar(255) unique,
+  - size           varchar(255), 
+  - uploaddate     DateTime,
+  - owner          varchar(255)
 
 ### Steps Required To Run Applications :
 

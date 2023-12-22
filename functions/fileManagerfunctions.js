@@ -4,6 +4,7 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const fs = require('fs');
 const path = require('path')
+const {addfilemetadata,deletefilemetadata} = require('./filemanagerDbfunctions')
 
 //Create main folder function
 const createMainuserfolder =async (req,res)=>{ 
@@ -94,7 +95,7 @@ const deletefolder = async (req,res)=>{
     {
         res.status(403).send({
             status : 403,
-            message : "Unauthorised,Forbidden access.You dont have permission to create subfolder in this location"
+            message : "Unauthorised,Forbidden access.You dont have permission to delete folder in this location"
         })
 
         return ;
@@ -132,6 +133,7 @@ const deletefile = async (req,res)=>{
   console.log(fileaddress,"address of key")
 
     let filekeyarr = fileaddress.split('/');
+    let filename = filekeyarr[filekeyarr.length-1];
     let mainFoldernamearr = filekeyarr[0].split('-');
     let folderauthoremail = mainFoldernamearr[mainFoldernamearr.length-1];
     
@@ -139,7 +141,7 @@ const deletefile = async (req,res)=>{
     {
         res.status(403).send({
             status : 403,
-            message : "Unauthorised,Forbidden access.You dont have permission to uplaod file in this location"
+            message : "Unauthorised,Forbidden access.You dont have permission to delete file in this location"
         })
 
         return ;
@@ -153,6 +155,19 @@ const deletefile = async (req,res)=>{
       try {
         const response =await s3.send(command);
         console.log(response,"File has been successfully deleted");
+
+        //To delete filematadata from database
+    const deletefilemetadataobj =await deletefilemetadata(filename);
+    if(deletefilemetadataobj.error)
+    {
+        res.status(400).send({
+            status :400,
+            message : "Failed to add matadata to DB",
+        })
+
+        return ;
+    }
+    console.log("Metadata of file added to database")
       }
       catch(error) {
         console.log(error);
@@ -172,9 +187,41 @@ const deletefile = async (req,res)=>{
 //Upload file function
 const uploadfile =async (req,res)=>{
 
+  console.log("Hello file data",req.file);
+
+  const fileaddress = req.body.awslocationkey;
+
+  console.log(fileaddress,"address of key")
+
+    let filekeyarr = fileaddress.split('/');
+    let mainFoldernamearr = filekeyarr[0].split('-');
+    let folderauthoremail = mainFoldernamearr[mainFoldernamearr.length-1];
+    
+    if(folderauthoremail!==req.locals.email)
+    {
+        res.status(403).send({
+            status : 403,
+            message : "Unauthorised,Forbidden access.You dont have permission to upload file in this location"
+        })
+
+        return ;
+    }
+
   try {
+
+    //To add filematadata to database
+    const addfilemetadataobj =await addfilemetadata(req.file,folderauthoremail);
+    if(addfilemetadataobj.error)
+    {
+        res.status(400).send({
+            status :400,
+            message : "Failed to add matadata to DB",
+        })
+
+        return ;
+    }
+    console.log("Metadata of file added to database")
     console.log("Body formdata",req.body.awslocationkey)
-    console.log("Hello",req.file);
     res.status(201).send({
         status:200,
         message:"File uploaded successfully",
@@ -196,6 +243,8 @@ const uploadfile =async (req,res)=>{
 const getfile = async (req,res)=>{
 
   const fileaddress = req.params['key'];
+
+  console.log(fileaddress,"address of key")
 
   const command = new GetObjectCommand({
     Bucket: "filemanager-s3bucket",
