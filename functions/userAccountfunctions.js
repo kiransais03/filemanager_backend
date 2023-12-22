@@ -130,11 +130,13 @@ const userlogin = async (req,res)=>{
     return ;
    }
 
+//    console.log("printing userdata",userData)
+
    //To store object as Base64 format in JWT token used for auth validation
    const payload = {
-    name : userData.data.name,
-    email : userData.data.email,
-    pdflocation : userData.data.pdflocation,
+    name : userData.data[0].name,
+    email : userData.data[0].email,
+    password : userData.data[0].password,
    }
 
    //Creating jwt token to authrize the user as LoggedIn

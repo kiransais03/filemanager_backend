@@ -63,6 +63,103 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/createfolder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"foldername\" : \"kiransaidata\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/filemanager/createfolder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"createfolder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/delete/kiransaidata-kiransais03@gmail.com",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/filemanager/deletefolder/kiransaidata-kiransais03@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"deletefolder",
+						"kiransaidata-kiransais03@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/filemanager/createsubfolder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token-filemanager",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2lyYW4gU2FpIiwiZW1haWwiOiJraXJhbnNhaXMwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQvSjFzbTY0SS5RUHVML0NhckFJNW8uWXhKOUI0eVhITnJJN3Q4OEhTWVdaTmRXOE9VWjB6LiIsImlhdCI6MTcwMzIzOTcyOX0.ZItAGXTq53fVSWkID8eJsd2cksW2xw2NVJec3Hnvwfg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"folderkey\" : \"kiransaidata-kiransais03@gmail.com/images\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/filemanager/createsubfolder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"filemanager",
+						"createsubfolder"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

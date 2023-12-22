@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const {usersingup,userlogin} = require('../functions/userAccoutnfunctions');
+const {usersingup,userlogin} = require('../functions/userAccountfunctions');
 
 
 app.post('/login',userlogin);
