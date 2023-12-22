@@ -23,12 +23,11 @@
 
 #####  Schema Of PostgreSQL Tables :
 ###### Table 1. “users” :
-  Attributes - 
-
-  email       varchar(255)   unique
-  password    varchar(255)  
-  name        varchar(255)  
-  createdAt   DateTime 
+######  Attributes 
+  - email       varchar(255) unique,
+  - password    varchar(255), 
+  - name        varchar(255),
+  - createdAt   DateTime,
 
 
 ### Steps Required To Run Applications :
