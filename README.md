@@ -13,11 +13,23 @@
 
 --And to store the User details, PostgreSQL has been used.
 
+--–For creating the tables in PostgreSQL an ORM called Prisma Migrate is used. 
+
 --For uploading files 'Multer" is used and to store files Amazon S3 cloud is used and corresponding meta data of files is stored in PostgresSQL database.
 
 --Implementing all the CRUD operations for creating folders,uploading files,renaming,deleting,getting file.
 
 --The Backend is Built on Express framework with Node.js runtime.
+
+#####  Schema Of PostgreSQL Tables :
+###### Table 1. “users” :
+  Attributes - 
+  id               Int                   autoincrement()
+  email            varchar(255)          unique
+  password         varchar(255)  
+  name             varchar(255)  
+  createdAt        DateTime 
+
 
 ### Steps Required To Run Applications :
 

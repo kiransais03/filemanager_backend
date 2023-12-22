@@ -10,17 +10,17 @@ const s3 = new S3Client({
 });
 
 
-// Example: List all objects in a bucket
-const listObjectsParams = {
-    Bucket: 'filemanager-s3bucket',
-  };
+// // Example: List all objects in a bucket
+// const listObjectsParams = {
+//     Bucket: 'filemanager-s3bucket',
+//   };
   
-  s3.send(new ListObjectsCommand(listObjectsParams))
-    .then((data) => {
-      console.log('Objects in the bucket:', data.Contents);
-    })
-    .catch((err) => {
-      console.error('Error listing objects:', err);
-    }); 
+//   s3.send(new ListObjectsCommand(listObjectsParams))
+//     .then((data) => {
+//       console.log('Objects in the bucket:', data.Contents);
+//     })
+//     .catch((err) => {
+//       console.error('Error listing objects:', err);
+//     }); 
 
 module.exports = {s3}

@@ -4,6 +4,7 @@ const {querying} = require('../elephantsql');
 //Saving userObject to database
 const addUsertoDB = async (userObj)=>{
    try {
+    console.log(userObj,"This is userObj")
     let querycmd = 'INSERT INTO users VALUES($1,$2,$3)';
      let result = await querying(querycmd,[userObj.email,userObj.password,userObj.name]);
      return TRUE;
