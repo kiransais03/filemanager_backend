@@ -21,7 +21,6 @@ const isAuth = async (req,res,next)=>{
     
     if(verifiedobj) {
         console.log("Verified object",verifiedobj);
-        console.log(jsonwebtoken.decode(token),"edcoeding");
     req.locals = verifiedobj; //Adding the payload object to req.locals to use in other functions
     next();
     }
