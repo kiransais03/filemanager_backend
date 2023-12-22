@@ -5,7 +5,7 @@ const s3 = new S3Client({
   region: 'eu-north-1',
   credentials: {
     accessKeyId: 'AKIAYO2EHKO3XDYWVJTK',
-    secretAccessKey: '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',
+    secretAccessKey: process.env.AWS_SECRET_ACCESSKEY,
   },
 });
 
