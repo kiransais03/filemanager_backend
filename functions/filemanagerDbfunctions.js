@@ -25,6 +25,28 @@ const addfilemetadata = async (filedata,email)=>{
 }
 
 
+//Get file size
+//Add uploading-file metatdata to Db
+const getfilesize = async (filename)=>{
+    const userData = {
+        data : null,
+        error : null,
+    }
+    let querycmd = 'SELECT size from filesmetadata WHERE filename=$1';
+
+    try {
+
+        userData.data = await querying(querycmd,[filename]);
+        // console.log(userData,"this is userObj from DB");
+        return userData;
+    }
+    catch(error) {
+        console.log("Error catched",error)
+        userData.error = error;
+        return userData;
+    }
+}
+
 //Add delete file metatdata from Db
 const deletefilemetadata = async (filename)=>{
     const userData = {
@@ -46,4 +68,4 @@ const deletefilemetadata = async (filename)=>{
 }
 
 
-module.exports = {addfilemetadata,deletefilemetadata}
+module.exports = {addfilemetadata,deletefilemetadata,getfilesize}

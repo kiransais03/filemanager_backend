@@ -1,4 +1,4 @@
-const { S3Client,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand} = require('@aws-sdk/client-s3');
+const { S3Client,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand,CopyObjectCommand} = require('@aws-sdk/client-s3');
 
 // Create an S3 client
 const s3 = new S3Client({
@@ -23,4 +23,4 @@ const s3 = new S3Client({
 //       console.error('Error listing objects:', err);
 //     }); 
 
-module.exports = {s3,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand}
+module.exports = {s3,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand,CopyObjectCommand}

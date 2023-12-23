@@ -4,7 +4,7 @@ const {s3} = require('../awssdk')
 const multer = require('multer');
 const multerS3 = require('multer-s3')
 const {isAuth} = require('../middlewares/isAuthmiddleware');
-const {createMainuserfolder,createsubfolder,deletefolder,uploadfile,deletefile,getfile} = require('../functions/fileManagerfunctions');
+const {createMainuserfolder,createsubfolder,deletefolder,uploadfile,deletefile,getfile,copyandpastefile} = require('../functions/fileManagerfunctions');
 
 //Folder functions
 
@@ -37,5 +37,6 @@ const upload = multer({
 
   app.get('/getfile/:key(*)',isAuth,getfile);
 
+  app.post('/copyandpastefile',isAuth,copyandpastefile);
+
 module.exports = app; 
- 

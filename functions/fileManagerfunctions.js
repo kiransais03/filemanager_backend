@@ -1,10 +1,10 @@
-const {s3,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand } = require('../awssdk');
+const {s3,ListObjectsCommand, PutObjectCommand,DeleteObjectCommand,GetObjectCommand,CopyObjectCommand} = require('../awssdk');
 const {TRUE,FALSE,ERROR,NOT_EXIST} = require('../constants');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const fs = require('fs');
 const path = require('path')
-const {addfilemetadata,deletefilemetadata} = require('./filemanagerDbfunctions')
+const {addfilemetadata,deletefilemetadata,getfilesize} = require('./filemanagerDbfunctions')
 
 //Create main folder function
 const createMainuserfolder =async (req,res)=>{ 
@@ -288,4 +288,103 @@ const getfile = async (req,res)=>{
 }
 
 
-module.exports = {createMainuserfolder,createsubfolder,deletefolder,uploadfile,deletefile,getfile};
+//Copy file function
+const copyandpastefile = async (req,res)=>{
+  let {sourcekey,destinationkey,destinationbucket} = req.body;
+
+  if(sourcekey===("/"+destinationbucket+destinationkey))
+  {
+    res.status(400).send({
+      status : 400,
+      message : "Source and destination cannot be same with same name"
+  })
+
+  return ;
+  }
+
+  console.log(sourcekey,"address of key")
+
+  let filekeyarr = sourcekey.split('/');
+  let filename = filekeyarr[filekeyarr.length-1];
+  console.log("Printing filename",filename);
+  let mainFoldernamearr = filekeyarr[2].split('-');
+  let folderauthoremail = mainFoldernamearr[mainFoldernamearr.length-1];
+    
+    if(folderauthoremail!==req.locals.email)
+    {
+        res.status(403).send({
+            status : 403,
+            message : "Unauthorised,Forbidden access.You dont have permission to copy file in this location"
+        })
+
+        return ;
+    }
+
+     const command = new CopyObjectCommand({
+        Bucket: destinationbucket,
+        CopySource: sourcekey,
+        Key : destinationkey
+      });
+
+      try {
+        const response =await s3.send(command);
+        console.log(response,"File has been successfully copied and pasted");
+
+    //To get the source file size
+    const getfilesizeobj = await getfilesize(filename);
+    console.log("Filesize obj",getfilesizeobj)
+    if(getfilesizeobj.error)
+    {
+        res.status(400).send({
+            status :400,
+            message : "Failed to get old file size from DB",
+            errormsg : getfilesizeobj.error
+        })
+
+        return ;
+    }
+
+    let copiedfilesize = getfilesizeobj.data[0].size;
+
+    // //New file name
+    // let destinationkeyarr = destinationkey.split('/');
+    // let newfilename = destinationkeyarr[destinationkeyarr.length-1];
+
+    //To add filematadata to database
+
+    let filedataobj = { 'key': destinationkey,
+                        'size' : copiedfilesize
+                      }
+
+    console.log("Filedata obj",filedataobj)
+    const addfilemetadataobj =await addfilemetadata(filedataobj,folderauthoremail);
+    if(addfilemetadataobj.error)
+    {
+        res.status(400).send({
+            status :400,
+            message : "Failed to add matadata to DB",
+        })
+
+        return ;
+    }
+    console.log("Metadata of file added to database")
+    console.log("Body formdata",req.body.awslocationkey)
+    res.status(201).send({
+        status:200,
+        message:"File copied and pasted successfully",
+    })
+    return ;
+  }
+  catch(error) {
+        console.log(error);
+        res.status(400).send({
+            status : 400,
+            message : "DB error:AWS S3 error.Failed at file copy paste",
+        })
+        return ;
+    }
+
+}
+
+
+module.exports = {createMainuserfolder,createsubfolder,deletefolder,uploadfile,deletefile,getfile,copyandpastefile};
