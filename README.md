@@ -35,6 +35,26 @@
   - uploaddate     DateTime,
   - owner          varchar(255)
 
+### API End Points :  For this Endpoints add the Domain URL.Refer to Filemanger.Postman.collection file in repository
+
+ - app.post('/user/login');
+
+ - app.post('/user/signup');
+
+ - app.post('/filemanager/createmainuserfolder');
+
+ - app.post('/filemanager/createsubfolder');
+
+ - app.delete('/filemanager/deletefolder/:key(*)');
+
+ - app.post('/filemanager/uploadfile');
+
+ - app.delete('/filemanager/deletefile/:key(*)');
+
+ - app.get('/filemanager/getfile/:key(*)');
+
+ - app.post('/filemanager/copyandpastefile');
+
 ### Steps Required To Run Applications :
 
 #### Backend :
